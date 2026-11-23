@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   Tema NEO-BRUTALISTA
+   - Bordes negros gruesos, esquinas rectas, sombras duras sin blur.
+   - Colores planos de alto contraste (negro sobre amarillo/rosa/verde: > 12:1).
+   ========================================================================== */
+:root {
+  --ion-color-primary: #000000;
+  --ion-color-primary-rgb: 0, 0, 0;
+  --ion-color-primary-contrast: #ffe500;
+  --ion-color-primary-contrast-rgb: 255, 229, 0;
+  --ion-color-primary-shade: #000000;
+  --ion-color-primary-tint: #1a1a1a;
+
+  --ion-background-color: #fffbea;
+  --ion-text-color: #000000;
+  --ion-font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* --- Clases reutilizables (Light DOM) ------------------------------------ */
+@layer components {
+  /* Tarjeta base brutalista */
+  .brutal-card {
+    @apply border-3 border-black bg-white shadow-brutal;
+  }
+
+  /* Interacción: al pasar el ratón "se levanta", al pulsar "se hunde" */
+  .brutal-interactive {
+    @apply cursor-pointer transition-all duration-150 ease-out
+      hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg
+      active:translate-x-1 active:translate-y-1 active:shadow-none
+      focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-black focus-visible:ring-offset-2
+      motion-reduce:transition-none motion-reduce:hover:translate-x-0 motion-reduce:hover:translate-y-0;
+  }
+
+  /* Botón brutalista nativo */
+  .brutal-btn {
+    @apply min-h-[44px] border-3 border-black px-4 text-xs font-black uppercase tracking-wide shadow-brutal-sm brutal-interactive;
+  }
+}
+
+/* --- Componentes Ionic (Shadow DOM): se estilan con CSS Custom Properties -- */
+ion-toolbar {
+  --border-width: 0 0 3px 0;
+  --border-color: #000;
+}
+
+ion-title {
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+ion-searchbar.brutal-search {
+  --background: #ffffff;
+  --border-radius: 0;
+  --box-shadow: none;
+  --color: #000;
+  --placeholder-color: #333;
+  --placeholder-opacity: 1;
+  --icon-color: #000;
+  padding: 0;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 0 #000;
+  transition: box-shadow 150ms ease-out, transform 150ms ease-out;
+}
+ion-searchbar.brutal-search:focus-within {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 #000;
+}
+
+ion-segment.brutal-segment {
+  --background: #ffffff;
+  border: 3px solid #000;
+  border-radius: 0;
+  box-shadow: 4px 4px 0 0 #000;
+}
+ion-segment.brutal-segment ion-segment-button {
+  --border-radius: 0;
+  --indicator-color: #ffe500;
+  --indicator-height: 100%;
+  --color: #000;
+  --color-checked: #000;
+  --background-hover: #ffe500;
+  --background-hover-opacity: 0.5;
+  font-weight: 900;
+  min-height: 44px;
+}
+
+/* IonItem de la lista: fondo transparente y padding propio */
+.incident-item {
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  --background: #ffffff;
+  --background-hover: #fffbea;
+  --background-hover-opacity: 1;
+}
+
+/* Campos del formulario */
+ion-item.brutal-field {
+  --background: #ffffff;
+  --border-width: 0;
+  --inner-border-width: 0;
+  border: 3px solid #000;
+  box-shadow: 2px 2px 0 0 #000;
+  transition: box-shadow 150ms ease-out, transform 150ms ease-out;
+}
+ion-item.brutal-field:focus-within {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 #000;
+  --background: #fffbea;
+}
+
+/* Botones Ionic */
+ion-button.brutal-ion-btn {
+  --border-radius: 0;
+  --box-shadow: none;
+  --background: #ffe500;
+  --background-hover: #ffe500;
+  --background-activated: #ffd000;
+  --color: #000;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 0 #000;
+  font-weight: 900;
+  text-transform: uppercase;
+  min-height: 48px;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+}
+ion-button.brutal-ion-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 #000;
+}
+ion-button.brutal-ion-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* FAB cuadrado con sombra dura; el icono gira al pasar el ratón */
+ion-fab-button.brutal-fab {
+  --border-radius: 0;
+  --box-shadow: none;
+  --background: #ff90e8;
+  --background-hover: #ff90e8;
+  --background-activated: #ff6bdd;
+  --color: #000;
+  width: 60px;
+  height: 60px;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 0 #000;
+  transition: transform 150ms ease-out, box-shadow 150ms ease-out;
+}
+ion-fab-button.brutal-fab ion-icon {
+  transition: transform 200ms ease-out;
+}
+ion-fab-button.brutal-fab:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 0 #000;
+}
+ion-fab-button.brutal-fab:hover ion-icon {
+  transform: rotate(90deg);
+}
+ion-fab-button.brutal-fab:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* Modal: altura y anchura en unidades de viewport */
+ion-modal.brutal-modal {
+  --border-radius: 0;
+  --box-shadow: 8px 8px 0 0 #000;
+  --width: min(640px, 100vw);
+  --height: 100vh;
+}
+@media (min-width: 768px) {
+  ion-modal.brutal-modal {
+    --height: 85vh;
+  }
+  ion-modal.brutal-modal::part(content) {
+    border: 3px solid #000;
+  }
+}
+
+/* Opciones deslizables con borde */
+ion-item-option {
+  font-weight: 900;
+  min-width: 64px;
+  border-left: 3px solid #000;
+}
+
+/* Usuarios que piden menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  ion-searchbar.brutal-search,
+  ion-item.brutal-field,
+  ion-button.brutal-ion-btn,
+  ion-fab-button.brutal-fab,
+  ion-fab-button.brutal-fab ion-icon {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Filtro activo del segmento: bloque amarillo sólido */
+ion-segment.brutal-segment ion-segment-button.segment-button-checked {
+  --background: #ffe500;
+  background: #ffe500;
+  border-left: 3px solid #000;
+  border-right: 3px solid #000;
+}
