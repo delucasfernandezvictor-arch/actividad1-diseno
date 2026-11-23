@@ -209,3 +209,15 @@ ion-segment.brutal-segment ion-segment-button.segment-button-checked {
   border-left: 3px solid #000;
   border-right: 3px solid #000;
 }
+
+/* Foco de teclado muy visible en botones Ionic (WCAG 2.4.7) */
+ion-button.brutal-ion-btn.ion-focused,
+ion-fab-button.brutal-fab.ion-focused,
+ion-button.brutal-ion-btn:focus-visible,
+ion-fab-button.brutal-fab:focus-visible {
+  outline: 4px solid #000;
+  outline-offset: 4px;
+  --background: #ffe500;
+  --background-focused: #ffe500;
+  --background-focused-opacity: 1;
+}
